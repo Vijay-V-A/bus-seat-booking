@@ -16,3 +16,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG  # Logs authentication and authorization details
+    org.springframework.web: INFO  # Logs HTTP requests and responses
+    org.springframework.boot.autoconfigure.security: DEBUG
+
+

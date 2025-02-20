@@ -1,5 +1,6 @@
 package com.vijay.busseatbooking.controller;
 
+import com.vijay.busseatbooking.dto.BusRequestDTO;
 import com.vijay.busseatbooking.model.Bus;
 import com.vijay.busseatbooking.model.Route;
 import com.vijay.busseatbooking.service.BusService;
@@ -33,9 +34,9 @@ public class BusController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Bus> addBus(@RequestBody Bus bus) {
-        Bus savedBus = busService.addBus(bus);
-        URI location = URI.create("/routes/" + savedBus.getId());
+    public ResponseEntity<Bus> addBus(@RequestBody BusRequestDTO busRequestDTO) {
+        Bus savedBus = busService.addBus(busRequestDTO);
+        URI location = URI.create("api/v1/routes/" + savedBus.getId());
         return ResponseEntity.created(location).body(savedBus);
     }
 

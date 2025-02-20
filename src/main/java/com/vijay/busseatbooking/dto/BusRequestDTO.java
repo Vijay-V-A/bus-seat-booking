@@ -1,27 +1,17 @@
-package com.vijay.busseatbooking.model;
+package com.vijay.busseatbooking.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.vijay.busseatbooking.enums.BusType;
 import com.vijay.busseatbooking.util.CustomLocalDateTimeDeserializer;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Bus extends BaseModel {
+public class BusRequestDTO {
 
     private String busName;
-    @Enumerated(value = EnumType.ORDINAL)
     private BusType busType;
     private String busNumber;
     private String driverName;
@@ -37,10 +27,6 @@ public class Bus extends BaseModel {
     @DateTimeFormat(pattern = "dd-MM-yyyy hh:mm a")
     private LocalDateTime endDateTime;
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("bus")
-    private List<Seat> seats;
-
-    @ManyToOne
-    private Route route;
+    private String source;
+    private String destination;
 }

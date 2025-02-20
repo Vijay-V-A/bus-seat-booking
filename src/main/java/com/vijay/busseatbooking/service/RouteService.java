@@ -48,4 +48,14 @@ public class RouteService {
 
         routeRepo.deleteById(id);
     }
+
+    public Route findbyRouteSourceAndDestination(String source, String destination) {
+        Optional<Route> route = routeRepo.findBySourceAndDestination(source, destination);
+        if(!route.isPresent())
+            throw new RecordNotFoundException("Route not found");
+
+        return route.get();
+    }
+
+
 }

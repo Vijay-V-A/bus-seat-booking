@@ -22,8 +22,4 @@ public class Seat extends BaseModel{
     private BusSeatType seatType;
 
     private SeatStatus seatStatus;
-
-    @ManyToOne
-    @JoinColumn(name = "bus_id", nullable = false)
-    private Bus bus;
 }

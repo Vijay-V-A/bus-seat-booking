@@ -40,15 +40,3 @@ public class Schedule extends BaseModel {
     private Route route;
 
 }
-
-//@ManyToMany
-//@JoinTable(
-//        name = "schedule_buses",
-//        joinColumns = @JoinColumn(name = "schedule_id"),
-//        inverseJoinColumns = @JoinColumn(name = "bus_id")
-//)
-//private List<Bus> buses;
-//
-//@ManyToOne
-//@JoinColumn(name = "route_id")
-//private Route route;

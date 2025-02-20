@@ -27,6 +27,6 @@ public class Bus extends BaseModel {
     private LocalDateTime endDateTime;
 
 
-    @OneToMany(mappedBy = "bus", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private List<Seat> seats;
 }

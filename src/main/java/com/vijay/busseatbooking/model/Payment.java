@@ -24,8 +24,4 @@ public class Payment extends BaseModel{
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @OneToOne
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
 }

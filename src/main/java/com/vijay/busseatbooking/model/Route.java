@@ -20,6 +20,4 @@ public class Route extends BaseModel{
     private String source;
     private String destination;
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Schedule> schedules;
 }

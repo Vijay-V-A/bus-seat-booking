@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/")
+@RequestMapping("api/v1/session")
 @AllArgsConstructor
 @Tag(name = "Session Controller")
 public class SessionController {
@@ -21,17 +21,17 @@ public class SessionController {
 
     private SessionService sessionService;
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ResponseEntity<User> signUp(@Valid @RequestBody User data) {
         return new ResponseEntity<>(sessionService.signUp(data), HttpStatus.CREATED);
     }
 
-    @PostMapping("signin")
+    @PostMapping("/signin")
     public ResponseEntity<TokenResponse> signIn(@Valid @RequestBody SignInRequestDTO credential) throws Exception {
         return new ResponseEntity<>(sessionService.signIn(credential), HttpStatus.OK);
     }
 
-    @DeleteMapping("signout")
+    @DeleteMapping("/signout")
     public ResponseEntity<User> postUserDetail(@Valid @RequestBody User data) {
         return new ResponseEntity<>(sessionService.signOut(data), HttpStatus.OK);
     }

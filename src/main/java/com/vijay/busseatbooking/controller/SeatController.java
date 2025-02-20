@@ -1,5 +1,6 @@
 package com.vijay.busseatbooking.controller;
 
+import com.vijay.busseatbooking.dto.SeatRequestDTO;
 import com.vijay.busseatbooking.model.Seat;
 import com.vijay.busseatbooking.service.SeatService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,14 +33,14 @@ public class SeatController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public ResponseEntity<Seat> addSeat(@RequestBody Seat seat) {
+    public ResponseEntity<Seat> addSeat(@RequestBody SeatRequestDTO seatRequestDTO) {
 
-        Seat savedSeat = seatService.addSeat(seat);
+        Seat savedSeat = seatService.addSeat(seatRequestDTO);
         URI location = URI.create("/routes/" + savedSeat.getId());
         return ResponseEntity.created(location).body(savedSeat);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<Seat> updateSeat(@PathVariable Long id, @RequestBody Seat seat) {
         return ResponseEntity.ok(seatService.updateSeat(id, seat));

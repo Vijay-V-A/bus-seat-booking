@@ -18,7 +18,7 @@ public class Payment extends BaseModel{
     private PaymentStatus paymentStatus;
     private String errorMessage;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(value = EnumType.ORDINAL)
     private TransactionType transactionType;
 
     @ManyToOne

@@ -38,7 +38,7 @@ public class RouteController {
         return ResponseEntity.created(location).body(savedRoute);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<Route> updateRoute(@PathVariable Long id, @RequestBody Route route) {
         return ResponseEntity.ok(routeService.updateRoute(id, route));

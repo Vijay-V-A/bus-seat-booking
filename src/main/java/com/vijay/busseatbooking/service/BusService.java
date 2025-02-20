@@ -6,6 +6,8 @@ import com.vijay.busseatbooking.repo.BusRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class BusService {
 
     private BusRepo busRepo;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a");
 
     public List<Bus> getAllBuses() {
         return busRepo.findAll();
@@ -29,8 +32,10 @@ public class BusService {
     }
 
     public Bus addBus(Bus bus) {
-        return busRepo.save(bus);
+
+       return busRepo.save(bus);
     }
+
 
     public Bus updateBus(Long id, Bus bus) {
         Optional<Bus> busRepoById = busRepo.findById(id);

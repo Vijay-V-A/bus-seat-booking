@@ -1,10 +1,15 @@
 package com.vijay.busseatbooking.service;
 
+import com.vijay.busseatbooking.dto.SeatRequestDTO;
 import com.vijay.busseatbooking.exception.RecordNotFoundException;
+import com.vijay.busseatbooking.model.Bus;
+import com.vijay.busseatbooking.model.BusSeatType;
 import com.vijay.busseatbooking.model.Seat;
+import com.vijay.busseatbooking.repo.BusSeatTypeRepo;
 import com.vijay.busseatbooking.repo.SeatRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +19,8 @@ import java.util.Optional;
 public class SeatService {
 
     private SeatRepo SeatRepo;
+    private BusService busService;
+    private BusSeatTypeService busSeatTypeService;
 
     public List<Seat> getAllSeats() {
         return SeatRepo.findAll();
@@ -27,8 +34,18 @@ public class SeatService {
         return seat.get();
     }
 
-    public Seat addSeat(Seat route) {
-        return SeatRepo.save(route);
+    @Transactional
+    public Seat addSeat(SeatRequestDTO seatRequestDTO) {
+        BusSeatType busSeatType = busSeatTypeService.findBySeatType(seatRequestDTO.getSeatType());
+        Bus bus = busService.getBusById(seatRequestDTO.getBusId());
+
+
+        Seat seat = new Seat();
+        seat.setSeatNumber(seatRequestDTO.getSeatNumber());
+        seat.setBus(bus);
+        seat.setSeatType(busSeatType);
+
+        return SeatRepo.save(seat);
     }
 
     public Seat updateSeat(Long id, Seat route) {

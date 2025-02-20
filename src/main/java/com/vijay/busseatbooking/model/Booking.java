@@ -1,9 +1,6 @@
 package com.vijay.busseatbooking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,7 +25,7 @@ public class Booking extends BaseModel {
     @ManyToOne
     private Bus bus;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Seat> seats;
 
     @ManyToOne

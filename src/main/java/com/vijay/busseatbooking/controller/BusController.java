@@ -39,7 +39,7 @@ public class BusController {
         return ResponseEntity.created(location).body(savedBus);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<Bus> updateBus(@PathVariable Long id, @RequestBody Bus bus) {
         return ResponseEntity.ok(busService.updateBus(id, bus));

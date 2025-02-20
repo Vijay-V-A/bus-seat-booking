@@ -13,4 +13,6 @@ public class PaymentGateWayResponseDTO {
     private String transactionId;
     private TransactionType transactionType;
     private String currency;
+    private Boolean error;
+    private String errorMessage;
 }

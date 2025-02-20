@@ -16,6 +16,7 @@ public class Payment extends BaseModel{
     private Double amount;
     private String currency;
     private PaymentStatus paymentStatus;
+    private String errorMessage;
 
     @Enumerated(EnumType.ORDINAL)
     private TransactionType transactionType;

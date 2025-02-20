@@ -6,6 +6,7 @@ import com.vijay.busseatbooking.model.Payment;
 import com.vijay.busseatbooking.repo.PaymentRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class PaymentService {
     private PaymentRepo paymentRepo;
     private PaymentGateWay paymentGateWay;
 
+   @Transactional
     public Payment processPayment(Payment payment) {
         PaymentGateWayResponseDTO paymentGateWayResponseDTO =  paymentGateWay.proceedToPayment(payment.getAmount());
         payment.setCurrency(paymentGateWayResponseDTO.getCurrency());
@@ -24,6 +26,7 @@ public class PaymentService {
         payment.setTransactionType(paymentGateWayResponseDTO.getTransactionType());
         payment.setPaymentStatus(paymentGateWayResponseDTO.getPaymentStatus());
         payment.setAmount(paymentGateWayResponseDTO.getPaymentAmount());
+        if(paymentGateWayResponseDTO.getError()) payment.setErrorMessage(paymentGateWayResponseDTO.getErrorMessage());
 
         return paymentRepo.save(payment);
     }

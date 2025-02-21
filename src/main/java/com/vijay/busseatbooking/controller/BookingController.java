@@ -1,7 +1,7 @@
 package com.vijay.busseatbooking.controller;
 
+import com.vijay.busseatbooking.dto.BookingRequestDTO;
 import com.vijay.busseatbooking.model.Booking;
-import com.vijay.busseatbooking.model.Schedule;
 import com.vijay.busseatbooking.service.BookingService;
 import com.vijay.busseatbooking.service.PaymentService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,14 +20,14 @@ import java.util.List;
 public class BookingController {
 
     private BookingService bookingService;
-    private PaymentService paymentService;
 
     @PostMapping
-    public ResponseEntity<Booking> bookSeat(@RequestBody Booking booking) {
+    public ResponseEntity<Booking> bookSeat(@RequestBody BookingRequestDTO bookingRequestDTO) {
 
-        Booking savedBooking = bookingService.bookSeat(booking);
+        Booking savedBooking = bookingService.bookSeat(bookingRequestDTO);
         URI location = URI.create("/routes/" + savedBooking.getId());
         return ResponseEntity.created(location).body(savedBooking);
+
     }
 
     @GetMapping("/{id}")

@@ -5,7 +5,6 @@ import com.vijay.busseatbooking.exception.RecordNotFoundException;
 import com.vijay.busseatbooking.model.Bus;
 import com.vijay.busseatbooking.model.BusSeatType;
 import com.vijay.busseatbooking.model.Seat;
-import com.vijay.busseatbooking.repo.BusSeatTypeRepo;
 import com.vijay.busseatbooking.repo.SeatRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,6 @@ public class SeatService {
         BusSeatType busSeatType = busSeatTypeService.findBySeatType(seatRequestDTO.getSeatType());
         Bus bus = busService.getBusById(seatRequestDTO.getBusId());
 
-
         Seat seat = new Seat();
         seat.setSeatNumber(seatRequestDTO.getSeatNumber());
         seat.setBus(bus);
@@ -51,7 +49,7 @@ public class SeatService {
     public Seat updateSeat(Long id, Seat route) {
 
         Optional<Seat> routeById = SeatRepo.findById(id);
-        if(!routeById.isPresent())
+        if (!routeById.isPresent())
             throw new RecordNotFoundException("Seat with id " + id + " not found");
         route.setId(id);
         return SeatRepo.save(route);
@@ -59,10 +57,14 @@ public class SeatService {
 
     public void deleteSeat(Long id) {
         Optional<Seat> seat = SeatRepo.findById(id);
-        if(!seat.isPresent())
+        if (!seat.isPresent())
             throw new RecordNotFoundException("Route with id " + id + " not found");
 
         SeatRepo.deleteById(id);
     }
-}
 
+    public List<Seat> getSeatsByIds(List<Long> seatIds) {
+        return SeatRepo.findByIdIn(seatIds);
+    }
+
+}
